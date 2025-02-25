@@ -40,10 +40,20 @@ int replaceStrings(std::string filename, std::string string1, std::string string
   if (!open_create_file(filename, fs, fs1))
     return 0;
 
-  // Lógica para reemplazar las palabras
-  std::cout << "String1   ->" << string1 <<std::endl;
-  std::cout << "String2   ->" << string2 <<std::endl;
-  std::cout << "Replacing the words" << std::endl;
+  // Lógica para copiar el archivo y sustituir cada ocurrencia de s1 por s2
+  std::string line;
+  while (std::getline(fs, line))
+  {
+    std::string newLine;
+    size_t pos = 0;
+    while ((pos = line.find(string1)) != std::string::npos)
+    {
+      newLine += line.substr(0, pos) + string2;
+      line = line.substr(pos + string1.length());
+    }
+    newLine += line;
+    fs1 << newLine << std::endl;
+  }
   // Cerramos los archivos
   close_files(fs, fs1);
   return 1;
