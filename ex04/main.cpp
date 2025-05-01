@@ -11,7 +11,7 @@ void close_files(std::fstream &fs, std::fstream &fs1)
 int open_create_file(std::string filename, std::fstream &fs, std::fstream &fs1)
 {
   // Intentamos abrir el archivo dado por argumento
-  fs.open (filename, std::fstream::in | std::fstream::out);
+  fs.open (filename.c_str(), std::fstream::in | std::fstream::out);
   if (!fs.is_open())
   {
     std::cout << "Error while opening the file" << std::endl;
@@ -21,8 +21,8 @@ int open_create_file(std::string filename, std::fstream &fs, std::fstream &fs1)
   // Si todo va bien creamos y abrimos el archivo de salida
   std::string outputFile;
   outputFile = outputFile + filename + ".replace";
-  std::ofstream outfile (outputFile);
-  fs1.open (outputFile, std::fstream::in | std::fstream::out);
+  std::ofstream outfile (outputFile.c_str());
+  fs1.open (outputFile.c_str(), std::fstream::in | std::fstream::out);
   if (!fs1.is_open())
   {
     std::cout << "Error while opening the file" << std::endl;
